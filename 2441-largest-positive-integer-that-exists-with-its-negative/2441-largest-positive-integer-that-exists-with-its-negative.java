@@ -2,20 +2,19 @@ import java.util.*;
 
 class Solution {
     public int findMaxK(int[] nums) {
-        Integer[] intNums = Arrays.stream(nums).boxed().toArray(Integer[] :: new);
-        Arrays.sort(intNums, (o1, o2) -> {
-            if(Math.abs(o1) == Math.abs(o2)) {
-                return Integer.compare(o1, o2);
-            } else {
-                return Integer.compare(Math.abs(o1), Math.abs(o2));
-            }
-        });
+        int answer = -1;
+        boolean[][] count = new boolean[1001][2];
         
-        for(int i = intNums.length - 1; 0 < i; i--) {
-            if(intNums[i] + intNums[i - 1] == 0) {
-                return Math.abs(intNums[i]);
+        for(int i = 0; i < nums.length; i++) {
+            if(nums[i] < 0) {  // 음수일 경우
+                count[-nums[i]][0] = true;
+                if(count[-nums[i]][1]) answer = Math.max(answer, -nums[i]);
+            } else if (0 < nums[i]) {  // 양수일 경우
+                count[nums[i]][1] = true;
+                if(count[nums[i]][0]) answer = Math.max(answer, nums[i]);
             }
         }
-        return -1;
+        
+        return answer;
     }
 }
