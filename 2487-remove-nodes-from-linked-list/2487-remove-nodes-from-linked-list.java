@@ -15,25 +15,21 @@ class Solution {
         Stack<Integer> stack = new Stack<>();
         
         while(head != null) {
-            while(!stack.isEmpty() && stack.peek() < head.val) {
-                stack.pop();
-            }
             stack.push(head.val);
             head = head.next;
         }
         
-        ListNode node = new ListNode(stack.pop(), null);
+        int max = stack.pop();
+        ListNode node = new ListNode(max, null);
+        int n;
         while(!stack.isEmpty()) {
-            node = new ListNode(stack.pop(), node);
+            n = stack.pop();
+            if(n >= max) {
+                node = new ListNode(n, node);
+                max = n;
+            }
         }
         
         return node;
-    }
-    private void print(ListNode node) {
-        while(node.next.next != null) {
-            System.out.printf("%d -> ", node.val);
-            node = node.next;
-        }
-        System.out.println(node.val);
     }
 }
