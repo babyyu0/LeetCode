@@ -38,17 +38,12 @@ class Solution {
             }
             if(!flag) break;
         }*/
+        answer[iScore[0].index] = "Gold Medal";
+        if(n > 1) answer[iScore[1].index] = "Silver Medal";
+        if(n > 2) answer[iScore[2].index] = "Bronze Medal";
         
-        for(int i = 0; i < n; i++) {
-            if(i > 2) {
-                answer[iScore[i].index] = i + 1 + "";
-            } else if (i == 0) {
-                answer[iScore[i].index] = "Gold Medal";
-            } else if (i == 1) {
-                answer[iScore[i].index] = "Silver Medal";
-            } else {
-                answer[iScore[i].index] = "Bronze Medal";
-            }
+        for(int i = 3; i < n; i++) {
+            answer[iScore[i].index] = i + 1 + "";
         }
         
         return answer;
