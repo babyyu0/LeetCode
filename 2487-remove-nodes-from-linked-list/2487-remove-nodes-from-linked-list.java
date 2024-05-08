@@ -14,18 +14,13 @@ class Solution {
     public ListNode removeNodes(ListNode head) {
         Stack<Integer> stack = new Stack<>();
         
-        while(head.next != null) {
+        while(head != null) {
             while(!stack.isEmpty() && stack.peek() < head.val) {
                 stack.pop();
             }
             stack.push(head.val);
             head = head.next;
         }
-        
-        while(!stack.isEmpty() && stack.peek() < head.val) {
-            stack.pop();
-        }
-        stack.push(head.val);
         
         ListNode node = new ListNode(stack.pop(), null);
         while(!stack.isEmpty()) {
