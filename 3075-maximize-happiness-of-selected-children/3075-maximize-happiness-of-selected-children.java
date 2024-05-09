@@ -3,12 +3,12 @@ import java.util.*;
 class Solution {
     public long maximumHappinessSum(int[] happiness, int k) {
         Arrays.sort(happiness);
-        int zero = 0;
+        int count = -1;
         long answer = 0;
         
-        for(int i = happiness.length - 1; i >= 0 && zero != k; i--) {
-            answer += Math.max(happiness[i] - zero, 0);
-            zero++;
+        int i = happiness.length - 1;
+        while(k > ++count) {
+            answer += Math.max(happiness[i--] - count, 0);
         }
         
         return answer;
