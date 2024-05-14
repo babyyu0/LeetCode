@@ -1,30 +1,17 @@
 import java.util.*;
 
-class Solution {
-    private class Pos {
-        int r, c;
-        Pos(int r, int c) {
-            this.r = r;
-            this.c = c;
-        }
-    }
-    
+class Solution {    
     private int n, m, MAX_VAL;
-    private int[][] grid, gold;
-    private Queue<int[]> queue;
+    private int[][] grid;
     private final int[] dr = {-1, 1, 0, 0}, dc = {0, 0, -1, 1};
     public int getMaximumGold(int[][] grid) {
         this.grid = grid;
         n = grid.length;
         m = grid[0].length;
-        gold = new int[n][m];
-        queue = new ArrayDeque<>();
         
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < m; j++) {
                 if(grid[i][j] != 0) {
-                    gold = new int[n][m];
-                    gold[i][j] = Math.max(gold[i][j], grid[i][j]);
                     findGold(i, j, new boolean[n][m], new int[n][m]);
                 }
             }
