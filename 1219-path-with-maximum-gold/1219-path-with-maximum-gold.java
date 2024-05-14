@@ -12,7 +12,7 @@ class Solution {
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < m; j++) {
                 if(grid[i][j] != 0) {
-                    findGold(i, j, new boolean[n][m], new int[n][m]);
+                    findGold(i, j, new boolean[n][m], grid[i][j]);
                 }
             }
         }
@@ -20,9 +20,8 @@ class Solution {
         return MAX_VAL;
     }
     
-    private void findGold(int r, int c, boolean[][] visited, int[][] gold) {
+    private void findGold(int r, int c, boolean[][] visited, int gold) {
         //System.out.println(grid[r][c] + " 방문");
-        gold[r][c] = Math.max(gold[r][c], grid[r][c]); //gold 초기화
         visited[r][c] = true; //방문 처리
         
         int nr, nc;
@@ -31,14 +30,11 @@ class Solution {
             nc = c + dc[i];
             //방문 가능 여부 확인
             if(0 <= nr && nr < n && 0 <= nc && nc < m && !visited[nr][nc] && grid[nr][nc] != 0) {
-                //System.out.println(grid[nr][nc] + " 진입...");
-                gold[nr][nc] = gold[r][c] + grid[nr][nc]; 
-                findGold(nr, nc, visited, gold);
+                findGold(nr, nc, visited, gold + grid[nr][nc]);
             }
         }
         
-        MAX_VAL = Math.max(MAX_VAL, gold[r][c]);
-        //System.out.println(gold[r][c] + " 값으로 "  + grid[r][c] + " 나가기...");
+        MAX_VAL = Math.max(MAX_VAL, gold);
         visited[r][c] = false; //방문 처리
     }
 }
