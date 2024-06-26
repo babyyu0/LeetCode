@@ -29,14 +29,11 @@ public:
         while(!queue.empty()) {
             node = queue[0];
             queue.erase(queue.begin());
-            
             nnums.push_back(node->val);
-            cout << node->val << " ";
             
             if(node->left != NULL) queue.push_back(node->left);
             if(node->right != NULL) queue.push_back(node->right);
         }
-        cout << endl;
         sort(nnums.begin(), nnums.end());
         
         return setNodes(0, nnums.size() - 1);
