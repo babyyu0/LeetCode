@@ -1,3 +1,3 @@
 class Solution:
     def findCenter(self, edges: List[List[int]]) -> int:
-        return [i for i in edges[0] if i in edges[1]][0]
+        return edges[0][0] if edges[0][0] in edges[1] else edges[0][1]
