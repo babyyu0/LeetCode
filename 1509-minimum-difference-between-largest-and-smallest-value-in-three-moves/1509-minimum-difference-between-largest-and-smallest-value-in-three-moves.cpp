@@ -5,7 +5,7 @@ public:
         
         int N = nums.size();
         sort(nums.begin(), nums.end());
-        long long answer = nums[N - 1] - nums[0];
+        long answer = nums[N - 1] - nums[0];
         
         for(int i = 0; i <= 3; i++) {
             if(answer > abs(nums[0 + i] - nums[N - 1 - (3 - i)])) {
