@@ -10,7 +10,7 @@
  */
 class Solution {
     public int[] nodesBetweenCriticalPoints(ListNode head) {
-        List<Integer> indexList = new ArrayList<>();
+        List<Integer> indexList = new LinkedList<>();
         indexList.add(-1000000);
         int min = 1000000;
         
