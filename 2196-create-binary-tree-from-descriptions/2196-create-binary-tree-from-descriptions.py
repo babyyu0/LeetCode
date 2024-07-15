@@ -1,26 +1,49 @@
-# Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, val=0, left=None, right=None):
-#         self.val = val
-#         self.left = left
-#         self.right = right
-class Solution:
-    def createBinaryTree(self, descriptions: List[List[int]]) -> Optional[TreeNode]:
-        tdict = {}
-        parentList, childList = list(), list()
-        for parent, child, isLeft in descriptions:
-            parentList.append(parent)
-            childList.append(child)
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
+        unordered_map<int, TreeNode*> tmap;
+        unordered_set<int> cset;
+        
+        
+        int parent, child, isLeft;
+        for(auto& desc : descriptions) {
+            parent = desc[0];
+            child = desc[1];
+            isLeft = desc[2];
             
-            if parent not in tdict:
-                tdict[parent] = TreeNode(parent)
-            if child not in tdict:
-                tdict[child] = TreeNode(child)
+            cset.emplace(child);
             
-            if isLeft > 0:
-                tdict[parent].left = tdict[child]
-            else:
-                tdict[parent].right = tdict[child]
-                
-                
-        return tdict[[x for x in parentList if x not in childList][0]]
+            if(tmap.find(parent) == tmap.end()) {
+                tmap[parent] = new TreeNode(parent);
+            }
+            if(tmap.find(child) == tmap.end()) {
+                tmap[child] = new TreeNode(child);
+            }
+            
+            if(isLeft) {
+                tmap[parent]->left = tmap[child];
+            } else {
+                tmap[parent]->right = tmap[child];
+            }
+        }
+        
+        for(auto& desc : descriptions) {
+            if(cset.find(desc[0]) == cset.end()) {
+                return tmap[desc[0]];
+            }
+        }
+        
+        return new TreeNode();
+    }
+};
