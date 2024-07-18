@@ -5,24 +5,24 @@
 #         self.left = left
 #         self.right = right
 
-import queue
+from collections import deque
 
 class Solution:
     def countPairs(self, root: TreeNode, distance: int) -> int:
         leafs = []
         
-        q = queue.Queue()
-        q.put([root, ""])
+        q = deque()
+        q.append([root, ""])
         
         node, dist = None, None
-        while q.empty() == False:
-            node, dist = q.get()
+        while q:
+            node, dist = q.popleft()
             if node.left == None and node.right == None:
                 leafs.append(dist)
             if node.left != None:
-                q.put([node.left, dist + "L"])
+                q.append([node.left, dist + "L"])
             if node.right != None:
-                q.put([node.right, dist + "R"])
+                q.append([node.right, dist + "R"])
         
         answer = 0
         for i, leaf1 in enumerate(leafs):
