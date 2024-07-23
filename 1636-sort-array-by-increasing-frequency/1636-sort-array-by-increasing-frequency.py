@@ -6,4 +6,4 @@ class Solution:
                 return 1 if a < b else -1
             else:
                 return 1 if x > y else -1
-        return sorted(sorted(nums, reverse=True), key=cmp_to_key(comparator))
+        return sorted(nums, key=cmp_to_key(comparator))
