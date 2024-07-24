@@ -15,7 +15,7 @@ class Solution {
             list.add(new int[]{nums[i], nums[i] != 0 ? mappedNum : mapping[0]});
         }
         
-        Collections.sort(list, (o1, o2) -> Integer.compare(o1[1], o2[1]));
+        Collections.sort(list, Comparator.comparingInt(o -> o[1]));
         
         for(int i = 0; i < nums.length; i++) {
             nums[i] = list.get(i)[0];
