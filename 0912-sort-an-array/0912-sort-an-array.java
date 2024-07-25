@@ -1,7 +1,6 @@
 class Solution {
     private List<Integer> quickSort(List<Integer> list) {
-        // System.out.println("List: " + list);
-        if(list.size() <= 1 || Collections.max(list) == Collections.min(list)) {
+        if(list.isEmpty() || Collections.max(list) == Collections.min(list)) {
             return list;
         }
         
