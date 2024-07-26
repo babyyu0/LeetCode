@@ -32,4 +32,4 @@ class Solution:
             elif cnt == min_cnt:
                 answer_list.append(i)
                 
-        return sorted(answer_list, reverse=True)[0]
+        return max(answer_list)
