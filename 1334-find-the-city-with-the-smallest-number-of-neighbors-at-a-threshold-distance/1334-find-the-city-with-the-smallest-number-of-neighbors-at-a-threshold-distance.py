@@ -20,16 +20,5 @@ class Solution:
                 break
             flag = False
             
-        answer_list, min_cnt, cnt = list(), 101, 0
-        for i, dist in enumerate(dists):
-            cnt = 0
-            for d in dist:
-                if d <= distanceThreshold:
-                    cnt += 1
-            if cnt < min_cnt:
-                min_cnt = cnt
-                answer_list = [i]
-            elif cnt == min_cnt:
-                answer_list.append(i)
-                
-        return max(answer_list)
+        answer_list = [sum(d <= distanceThreshold for d in dist) for dist in dists]
+        return max([i for i, val in enumerate(answer_list) if val == min(answer_list)])
